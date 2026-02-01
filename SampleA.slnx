@@ -1,0 +1,6 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/SampleA.AppHost/SampleA.AppHost.csproj" />
+    <Project Path="src/SampleFrontend/SampleFrontend.csproj" />
+  </Folder>
+</Solution>
