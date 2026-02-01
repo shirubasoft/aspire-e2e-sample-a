@@ -1,0 +1,16 @@
+{
+  "Aspire": {
+    "Resources": {
+      "sample-frontend": {
+        "Id": "sample-frontend",
+        "Name": "SampleFrontend",
+        "Mode": "Container",
+        "ContainerImage": "sample-frontend",
+        "ContainerTag": "latest",
+        "BuildImage": true,
+        "BuildImageCommand": "docker build -t sample-frontend .",
+        "GitHubRepository": "shirubasoft/aspire-e2e-sample-a"
+      }
+    }
+  }
+}

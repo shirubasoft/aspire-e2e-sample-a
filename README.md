@@ -1,25 +1,21 @@
 # aspire-e2e-sample-a
 
-Sample repository demonstrating [Aspire E2E](https://github.com/shirubasoft/aspire-e2e) cross-repo resource importing.
+Sample repository demonstrating [Aspire E2E](https://github.com/shirubasoft/aspire-e2e) manifest-based resource declaration for non-.NET repos.
 
-This repo contains a `SampleFrontend` service and an AppHost that references `sample-api` from [aspire-e2e-sample-b](https://github.com/shirubasoft/aspire-e2e-sample-b) using the `GitHubRepository` tag.
+This repo contains a Go HTTP service with an `.aspire-e2e.json` manifest, allowing other repositories to import and run this service as a container via `a2a import`.
 
 ## Structure
 
-- `src/SampleFrontend` — A minimal ASP.NET Core frontend
-- `src/SampleA.AppHost` — Aspire AppHost with a `SharedResourceReference` pointing to `shirubasoft/aspire-e2e-sample-b`
+- `src/` — A minimal Go HTTP server
+- `Dockerfile` — Multi-stage build for the Go service
+- `.aspire-e2e.json` — Manifest declaring `sample-frontend` as a shared resource
 
 ## Usage
 
-Install the CLI and import resources from the AppHost:
+Other repos can reference this service by adding a `SharedResourceReference` with a `GitHubRepository` tag pointing to `shirubasoft/aspire-e2e-sample-a`, then running:
 
 ```bash
-dotnet tool install -g Shirubasoft.Aspire.E2E.Cli
-a2a import-csproj ./src/SampleA.AppHost/SampleA.AppHost.csproj
+a2a import ./path/to/AppHost.csproj
 ```
 
-The auto-clone feature will:
-1. Clone `shirubasoft/aspire-e2e-sample-b` one level above this repo
-2. Find the matching `sample-api` SharedResourceReference in the cloned repo
-3. Enrich the imported resource with metadata (Name, ContainerImage, ContainerTag, etc.)
-4. Register it in the global config (`~/.aspire-e2e/resources.json`)
+The auto-clone feature will fetch this repo, find the `.aspire-e2e.json` manifest, and enrich the imported resource with the declared metadata. Since this is a non-.NET repo, the service always runs in container mode.
