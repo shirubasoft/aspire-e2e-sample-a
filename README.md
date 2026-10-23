@@ -1,5 +1,10 @@
 # aspire-e2e-sample-a
 
+> [!IMPORTANT]
+> This repository is archived. It was a sample for `aspire-e2e`, whose successor is the
+> [Multirepo extension](https://github.com/shirubasoft/aspire-extensions/tree/main/extensions/Shirubasoft.Aspire.Extensions.Multirepo)
+> in shirubasoft/aspire-extensions.
+
 Sample repository demonstrating [Aspire E2E](https://github.com/shirubasoft/aspire-e2e) manifest-based resource declaration for non-.NET repos.
 
 This repo contains a Go HTTP service with an `.aspire-e2e.json` manifest, allowing other repositories to import and run this service as a container via `a2a import`.
